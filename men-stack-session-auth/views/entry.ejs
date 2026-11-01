@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+        <h1>Entrys</h1>
+        <a href="/entries/new">Create New Entry</a>
+        <% for(let entry of entries) { %>
+            <div>
+                <h2>
+                    <%= entry.title %>
+                </h2>
+                <p>
+                    <%= entry.entry %>
+                </p>
+                <p>By: <%= entry.owner.username %>
+                </p>
+
+                <% if (user._id.toString()===entry.owner._id.toString()) { %>
+                    
+                    <form action="/entries/<%= entry._id %>/edit" method="GET">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/entries/<%= entry._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <% } %>
+            </div>
+
+            <% } %>
